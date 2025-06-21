@@ -1,0 +1,43 @@
+#list {
+    width: 20%
+}
+#Instructions{
+    width: 50%
+}
+#Ingredients{
+    width: 20%
+}
+ul{
+    list-style-type: circle;
+    list-style-position:outside;
+    
+}
+#toolBar{
+    width: 90%;
+}
+#root {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 95%;
+}
+li::marker{
+    color:black
+}
+Modal.body{
+    width: 50%;
+}
+#scroll{
+    max-height: 140px;
+    overflow-y: scroll;
+}
+#SpaceList{
+    margin-bottom: 9px
+}
+#mainTable{
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 95%;
+}
+#LightGreen{
+    background-color: rgb(210,242,212);
+}
