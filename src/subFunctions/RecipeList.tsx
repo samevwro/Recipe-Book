@@ -6,7 +6,8 @@ export function RecipeList({setRecipe, selRecipe, Recipes}: {setRecipe: (id:numb
     const handleRecipeClick = (id: number) => {
         setRecipe(id)
     }
-
+    //Using the list render function with the map method to create each recipe name and pass the correct id as well
+    //if the item is favorited or selected
     let RecipeList = Recipes.map(
         (recipes: { id: any; name: any; favorite: boolean}) =>
             <ListRender favorite={recipes.favorite} key={recipes.id} onSelected={handleRecipeClick} selectedRecipe={selRecipe == recipes.id}

@@ -22,11 +22,9 @@ export function ToolBar({ favoriteRecipe, deleteRecipe, selRecipe, ChangeForm, I
     const handleClose = () => ChangeForm(false)
     const handleOpen = () => ChangeForm(true)
     
-    //state for form list items
+    //state for form list items to be added to the other data and the table within the modal
     const [FormIngredients, setFormIngredients] = useState([] as string[])
     const [FormInstructions, setFormInstructions] = useState([] as string[])
-    
-    
     
     const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
         setFormValues({
@@ -34,7 +32,7 @@ export function ToolBar({ favoriteRecipe, deleteRecipe, selRecipe, ChangeForm, I
             [event.target.name]: event.target.value
         })
 
-    
+    //This function is to submit the new recipe values to the state holding all the recipes 
     const handleSubmit = () => {
         AddRecipe()
         setFormValues({
@@ -46,7 +44,6 @@ export function ToolBar({ favoriteRecipe, deleteRecipe, selRecipe, ChangeForm, I
         setFormInstructions([])
         ChangeForm(false)
     }
-    
     return (
         <div id="LightGreen" className=" column-gap">
             <Button style={{ margin: 5 }} variant="outline-secondary" onClick={handleOpen}><img style={{ width: "1.2rem" }} src={addIcon} alt="" /></Button>

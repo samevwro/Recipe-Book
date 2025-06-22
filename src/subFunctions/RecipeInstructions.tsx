@@ -1,6 +1,6 @@
 
 export function RecipeInstructions({selRecipe, Recipes}: {selRecipe: number, Recipes: any}) {
-    
+    //this is where the list items are created for the recipe data 
     let Instructions = <>
         {Recipes[selRecipe].instructions.map((values: string[])=> 
             <li id="SpaceList">{values}</li>

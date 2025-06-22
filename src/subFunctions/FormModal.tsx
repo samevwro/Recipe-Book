@@ -25,7 +25,7 @@ export function FormModal({IsFormOpen, handleClose, formValues, setFormValues, F
     const handleInfoButtonClick = () => {
         setInfoIsExpanded(!InfoIsExpanded)
     }
-    //functions to add to state for list and form items and other items
+    //functions to add to state for the list items and values
     let NewIngredientsList = FormIngredients.map(
         (Ingredients: string) =>
             <li>{Ingredients}</li>
@@ -35,12 +35,14 @@ export function FormModal({IsFormOpen, handleClose, formValues, setFormValues, F
             <li key={Instuctions.indexOf(Instuctions)}>{Instuctions}</li>
     )
 
-    const handleInstructions = () => {
+    const handleInstructions = (e: any) => {
+        e.preventDefault()
         setFormInstructions((NewValue: string[]) => [
             ...NewValue, 
             FormInstructionsValue
         ])
         setFormInstructionsValue("")
+        
     }
     useEffect(()=> {
         setFormValues({
@@ -48,7 +50,9 @@ export function FormModal({IsFormOpen, handleClose, formValues, setFormValues, F
             instructions: FormInstructions
         })
     }, [FormInstructions])
-    const handleIngredients = () => {
+    
+    const handleIngredients = (e: any) => {
+        e.preventDefault()
         setFormIngredients((NewIngredients: string[]) => [
             ...NewIngredients,
             FormIngredientsValue
@@ -61,8 +65,9 @@ export function FormModal({IsFormOpen, handleClose, formValues, setFormValues, F
             ingredients: FormIngredients
         })
     }, [FormIngredients])
-
-
+    
+    //I used a modal to input so it can be dismissed when its not neccisary
+    //since your not always adding recipes and just looking
     return(
         <Modal show={IsFormOpen} onHide={handleClose} backdrop="static" keyboard={true}>
                 <Modal.Header closeButton>
@@ -77,7 +82,7 @@ export function FormModal({IsFormOpen, handleClose, formValues, setFormValues, F
                     <div><label htmlFor="ingredients">Recipe Ingredients</label> </div>
                     
                     <form className="input-group">
-                        <input type="text" className="form-control" id="ingredientsForm" name="ingredients" value={FormIngredientsValue} onChange={(value) => { setFormIngredientsValue(value.target.value) }} required />
+                        <input type="text" className="form-control" id="ingredientsForm" name="ingredients" value={FormIngredientsValue} onChange={(value) => { setFormIngredientsValue(value.target.value) }}  />
                         <button className="btn btn-outline-secondary" onClick={handleIngredients} type="button" id="AddIngredient">Add</button>
                     </form>
                     <div>
@@ -88,7 +93,7 @@ export function FormModal({IsFormOpen, handleClose, formValues, setFormValues, F
                     <br />
                     <div><label className="d-column align-items-baseline" htmlFor="instructions">Recipe Instructions</label></div>
                     <form className="input-group">
-                        <textarea name="instructions" id="instructionsForm" className="form-control" style={{height: "100px" }} value={FormInstructionsValue} onChange={(event)=> {setFormInstructionsValue(event.target.value)}} required/>
+                        <textarea name="instructions" id="instructionsForm" className="form-control" style={{height: "100px" }} value={FormInstructionsValue} onChange={(event)=> {setFormInstructionsValue(event.target.value)}} />
                         <button className="btn btn-outline-secondary" onClick={handleInstructions}>Add</button>
                     </form>
                     <div>
@@ -106,10 +111,10 @@ export function FormModal({IsFormOpen, handleClose, formValues, setFormValues, F
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className="secondary" onClick={handleInfoButtonClick}>Info</Button>
-                    <Button className="secondary" onClick={handleClose}>
+                    <Button className="secondary"  onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => handleSubmit()}>
+                    <Button variant="primary" onSubmit={handleSubmit} formNoValidate onClick={() => handleSubmit()}>
                         Add
                     </Button>
                     
